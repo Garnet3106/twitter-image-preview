@@ -14,7 +14,7 @@ function addCSSElem() {
 
     let link = document.createElement('link');
 
-    link.href = chrome.runtime.getURL('scripts/tweets.css');
+    link.href = chrome.runtime.getURL('data/tweets.css');
     link.id = cssElemID;
     link.rel = 'stylesheet';
 
