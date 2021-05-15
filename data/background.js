@@ -13,7 +13,7 @@ chrome.tabs.onUpdated.addListener((tabID, info, tab) => {
 function executeScripts(url) {
     if(url.startsWith('https://twitter.com')) {
         chrome.tabs.executeScript(null, {
-            file: './scripts/tweets.js'
+            file: './data/tweets.js'
         }, () => {});
     }
 }

@@ -31,6 +31,19 @@ function initClickEvent() {
 
 
 function onKeyDown(event) {
+    console.log(event.key)
+
+    if(event.key === 'Escape') {
+        let prevWrapper = document.getElementById('tipPrevWrapper');
+
+        if(prevWrapper !== null) {
+            removeImagePreview(prevWrapper);
+            event.preventDefault();
+        }
+
+        return;
+    }
+
     if(event.key !== 'Shift')
         return;
 
@@ -83,6 +96,7 @@ function previewImage(imgSrc) {
 
     wrapper.append(footer);
     wrapper.append(img);
+
     document.body.insertBefore(wrapper, document.body.firstChild);
 
     setTimeout(() => {
