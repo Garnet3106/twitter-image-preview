@@ -1,0 +1,18 @@
+{
+    "background": {
+        "scripts": [
+            "./scripts/background.js"
+        ]
+    },
+    "description": "",
+    "name": "Twitter Image Preview",
+    "manifest_version": 2,
+    "permissions": [
+        "https://twitter.com/*",
+        "tabs"
+    ],
+    "version": "0.0.0",
+    "web_accessible_resources": [
+        "scripts/*"
+    ]
+}
