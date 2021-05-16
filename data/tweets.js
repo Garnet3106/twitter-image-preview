@@ -1,9 +1,11 @@
+disablePreview = false;
+
 var latestMousePosX = 0;
 var latestMousePosY = 0;
 
 
 addCSSElem();
-initClickEvent();
+initEvents();
 
 
 function addCSSElem() {
@@ -22,11 +24,22 @@ function addCSSElem() {
 }
 
 
-function initClickEvent() {
+function initEvents() {
+    window.onerror = onError;
+
     document.body.onkeydown = onKeyDown;
     document.body.onkeyup = onKeyUp;
 
     document.body.onmousemove = onMouseMove;
+}
+
+
+/*
+ * 説明: chrome.i18n.getMessage() でのエラーはキャッチしない
+ */
+function onError(event) {
+    console.error(`Unknown error: please notify me about the error on Twitter if you can't solve it. (content: ${event})`);
+    disablePreview = true;
 }
 
 
@@ -73,6 +86,9 @@ function onMouseMove(event) {
 
 
 function previewImage(imgSrc) {
+    if(disablePreview)
+        return;
+
     let wrapper = document.createElement('div');
 
     wrapper.className = 'tip-preview-wrapper';
@@ -92,6 +108,9 @@ function previewImage(imgSrc) {
 
     let footer = getPrevFooterElem(imgSrc);
 
+    if(footer === null)
+        return;
+
     wrapper.append(footer);
     wrapper.append(img);
 
@@ -103,6 +122,9 @@ function previewImage(imgSrc) {
 }
 
 
+/*
+ * 返り値: 生成されたフッタ要素; 生成に失敗した場合は null
+ */
 function getPrevFooterElem(imgSrc) {
     // フッタ作成
 
@@ -118,10 +140,22 @@ function getPrevFooterElem(imgSrc) {
 
     // リストアイテム作成 - 閉じる
 
+    let closeItemText = '';
+    let openItemText = '';
+
+    try {
+        closeItemText = chrome.i18n.getMessage('prevMenuClose');
+        openItemText = chrome.i18n.getMessage('prevMenuNewlyOpen');
+    } catch(e) {
+        disablePreview = true;
+        console.error('Failed to load locale data. Please reload the page for validating the extension.');
+        return null;
+    }
+
     let closeItem = document.createElement('a');
 
     closeItem.className = 'tip-preview-footer-menu-item';
-    closeItem.innerText = chrome.i18n.getMessage('prevMenuClose');
+    closeItem.innerText = closeItemText;
 
     closeItem.addEventListener('click', () => {
         let wrapper = document.getElementById('tipPrevWrapper');
@@ -136,7 +170,7 @@ function getPrevFooterElem(imgSrc) {
 
     openItem.className = 'tip-preview-footer-menu-item';
     openItem.href = imgSrc;
-    openItem.innerText = chrome.i18n.getMessage('prevMenuNewlyOpen');
+    openItem.innerText = openItemText;
     openItem.rel = 'noopener noreferrer';
     openItem.target = '_blank';
 
