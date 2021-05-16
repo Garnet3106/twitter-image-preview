@@ -12,6 +12,8 @@ div.tip-preview-wrapper {
 }
 
 img.tip-preview-img {
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 2px rgb(0, 0, 0, 0.5);
     user-select: none;
 }
 
@@ -43,11 +45,27 @@ a.tip-preview-footer-menu-item {
 }
 
 div.tip-preview-footer-description {
-    border-radius: 4px;
     color: #ffffff;
+    display: flex;
     font-size: 15px;
+    justify-content: center;
     margin-top: 10px;
-    text-align: center;
+    text-shadow: 2px 2px 3px #000000;
     user-select: none;
     width: 100vw;
+}
+
+div.tip-preview-footer-description-text {
+    margin-right: 5px;
+}
+
+a.tip-preview-footer-description-link {
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+a.tip-preview-footer-description-link:hover {
+    text-decoration: underline;
 }

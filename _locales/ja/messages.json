@@ -5,10 +5,16 @@
     "extDesc": {
         "message": "Twitter のサムネイル画像をシフトキーで拡大プレビューします。"
     },
+    "prevDescExtName": {
+        "message": "Twitter 画像プレビュー by"
+    },
+    "prevDescUserID": {
+        "message": "@Garnet3106"
+    },
     "prevMenuClose": {
         "message": "閉じる"
     },
-    "prevMenuOpenInNewTab": {
-        "message": "新規タブで開く"
+    "prevMenuNewlyOpen": {
+        "message": "新しく開く"
     }
 }

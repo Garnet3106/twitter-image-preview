@@ -31,8 +31,6 @@ function initClickEvent() {
 
 
 function onKeyDown(event) {
-    console.log(event.key)
-
     if(event.key === 'Escape') {
         let prevWrapper = document.getElementById('tipPrevWrapper');
 
@@ -132,13 +130,13 @@ function getPrevFooterElem(imgSrc) {
 
     menu.append(closeItem);
 
-    // リストアイテム作成 - 新規タブ
+    // リストアイテム作成 - 新しく開く
 
     let openItem = document.createElement('a');
 
     openItem.className = 'tip-preview-footer-menu-item';
     openItem.href = imgSrc;
-    openItem.innerText = chrome.i18n.getMessage('prevMenuOpenInNewTab');
+    openItem.innerText = chrome.i18n.getMessage('prevMenuNewlyOpen');
     openItem.rel = 'noopener noreferrer';
     openItem.target = '_blank';
 
@@ -147,12 +145,27 @@ function getPrevFooterElem(imgSrc) {
 
     // ディスクリプション作成
 
-    let description = document.createElement('div');
+    let desc = document.createElement('div');
 
-    description.className = 'tip-preview-footer-description';
-    description.innerText = 'Twitter Image Preview by @Garnet3106'
+    desc.className = 'tip-preview-footer-description';
 
-    footer.append(description);
+    let descText = document.createElement('div');
+
+    descText.className = 'tip-preview-footer-description-text';
+    descText.innerText = chrome.i18n.getMessage('prevDescExtName');
+
+    desc.append(descText);
+
+    let descLink = document.createElement('a');
+
+    descLink.className = 'tip-preview-footer-description-link';
+    descLink.href = 'https://twitter.com/Garnet3106';
+    descLink.innerText = chrome.i18n.getMessage('prevDescUserID');
+    descLink.rel = 'noopener noreferrer';
+    descLink.target = '_blank';
+
+    desc.append(descLink);
+    footer.append(desc);
 
     return footer;
 }

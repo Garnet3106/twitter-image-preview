@@ -5,10 +5,16 @@
     "extDesc": {
         "message": "Preview thumbnail images on Twitter with the shift key."
     },
+    "prevDescExtName": {
+        "message": "Twitter Image Preview by"
+    },
+    "prevDescUserID": {
+        "message": "@Garnet3106"
+    },
     "prevMenuClose": {
         "message": "Close"
     },
-    "prevMenuOpenInNewTab": {
-        "message": "Open in a New Tab"
+    "prevMenuNewlyOpen": {
+        "message": "Newly Open"
     }
 }
