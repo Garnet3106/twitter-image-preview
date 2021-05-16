@@ -123,7 +123,7 @@ function getPrevFooterElem(imgSrc) {
     let closeItem = document.createElement('a');
 
     closeItem.className = 'tip-preview-footer-menu-item';
-    closeItem.innerText = 'Close';
+    closeItem.innerText = chrome.i18n.getMessage('prevMenuClose');
 
     closeItem.addEventListener('click', () => {
         let wrapper = document.getElementById('tipPrevWrapper');
@@ -138,7 +138,7 @@ function getPrevFooterElem(imgSrc) {
 
     openItem.className = 'tip-preview-footer-menu-item';
     openItem.href = imgSrc;
-    openItem.innerText = 'Open Image in New Tab';
+    openItem.innerText = chrome.i18n.getMessage('prevMenuOpenInNewTab');
     openItem.rel = 'noopener noreferrer';
     openItem.target = '_blank';
 

@@ -1,0 +1,14 @@
+{
+    "extName": {
+        "message": "Twitter Image Preview (beta)"
+    },
+    "extDesc": {
+        "message": "Preview thumbnail images on Twitter with the shift key."
+    },
+    "prevMenuClose": {
+        "message": "Close"
+    },
+    "prevMenuOpenInNewTab": {
+        "message": "Open in a New Tab"
+    }
+}

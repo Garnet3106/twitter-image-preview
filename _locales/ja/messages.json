@@ -1,0 +1,14 @@
+{
+    "extName": {
+        "message": "Twitter 画像プレビュー (ベータ)"
+    },
+    "extDesc": {
+        "message": "Twitter のサムネイル画像をシフトキーで拡大プレビューします。"
+    },
+    "prevMenuClose": {
+        "message": "閉じる"
+    },
+    "prevMenuOpenInNewTab": {
+        "message": "新規タブで開く"
+    }
+}
