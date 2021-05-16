@@ -37,8 +37,12 @@ function initEvents() {
 /*
  * 説明: chrome.i18n.getMessage() でのエラーはキャッチしない
  */
-function onError(event) {
-    console.error(`Unknown error: please notify me about the error on Twitter if you can't solve it. (content: ${event})`);
+function onError(message) {
+    // 各ツイートページで毎回発生するため無視; 原因未詳だが重大ではない
+    if(message === 'ResizeObserver loop limit exceeded')
+        return;
+
+    console.error(`Unknown error: please notify me about the error on Twitter if you can't solve it. (content: ${message})`);
     disablePreview = true;
 }
 
@@ -100,11 +104,7 @@ function previewImage(imgSrc) {
     img.id = 'tipPrevImg';
     img.src = imgSrc;
 
-    if(img.naturalHeight < img.naturalWidth) {
-        img.style.width = '80vw';
-    } else {
-        img.style.height = '80vh';
-    }
+    setPreviewImgSize(img);
 
     let footer = getPrevFooterElem(imgSrc);
 
@@ -119,6 +119,15 @@ function previewImage(imgSrc) {
     setTimeout(() => {
         wrapper.style.opacity = '1';
     }, 10);
+}
+
+
+function setPreviewImgSize(img) {
+    if(Math.abs(document.body.clientHeight / img.naturalHeight) < Math.abs(document.body.clientWidth / img.naturalWidth)) {
+        img.style.height = '80vh';
+    } else {
+        img.style.width = '80vw';
+    }
 }
 
 
