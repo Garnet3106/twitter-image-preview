@@ -5,8 +5,13 @@
         ]
     },
     "description": "",
-    "name": "Twitter Image Preview",
+    "icons": {
+        "128": "icons/logo_128.png",
+        "48": "icons/logo_48.png",
+        "16": "icons/logo_16.png"
+    },
     "manifest_version": 2,
+    "name": "Twitter Image Preview",
     "permissions": [
         "https://twitter.com/*",
         "tabs"
