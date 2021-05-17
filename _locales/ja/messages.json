@@ -20,6 +20,9 @@
     "pageCont_summary": {
         "message": "概要"
     },
+    "pageCont_summary_1_1": {
+        "message": "Twitter のサムネイル画像を簡単に拡大プレビューできる Chrome 拡張機能です。"
+    },
     "pageCont_usage": {
         "message": "使い方"
     },
