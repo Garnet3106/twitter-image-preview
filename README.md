@@ -34,7 +34,7 @@ I hope you like it, and would be glad if you share this extension with your frie
 
 |Version|Release Date|Changes|Notes|
 |:-:|:-:|:-:|:-:|
-|0.0.0|2020/05/17|Released the first beta version.||
+|0.0.0|2020/05|Released the first beta version.||
 
 ## 日本語
 
@@ -70,7 +70,7 @@ Twitter 画像プレビューをご利用いただきありがとうございま
 
 |バージョン|リリース日|変更点|備考|
 |:-:|:-:|:-:|:-:|
-|0.0.0|2020/05/17|初ベータ版をリリース||
+|0.0.0|2020/05|初ベータ版をリリース||
 
 ---
 
