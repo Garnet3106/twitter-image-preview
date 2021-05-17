@@ -16,5 +16,80 @@
     },
     "prevMenuNewlyOpen": {
         "message": "Newly Open"
+    },
+    "pageCont_summary": {
+        "message": "Summary"
+    },
+    "pageCont_summary_1_1": {
+        "message": "This Chrome extension make you be able to preview thumbnail images quickly on Twitter."
+    },
+    "pageCont_usage": {
+        "message": "Usage"
+    },
+    "pageCont_usage_1_1": {
+        "message": "You can preview thumbnail images to press"
+    },
+    "pageCont_usage_1_2": {
+        "message": "Shift"
+    },
+    "pageCont_usage_1_3": {
+        "message": "key while hovering your mouse over."
+    },
+    "pageCont_usage_2_1": {
+        "message": "You can also close the preview to release"
+    },
+    "pageCont_usage_2_2": {
+        "message": "Shift"
+    },
+    "pageCont_usage_2_3": {
+        "message": "key, or select"
+    },
+    "pageCont_usage_2_4": {
+        "message": "Close"
+    },
+    "pageCont_usage_2_5": {
+        "message": "menu item."
+    },
+    "pageCont_usage_3_1": {
+        "message": "It will open the image source as a new tab to select"
+    },
+    "pageCont_usage_3_2": {
+        "message": "Newly Open"
+    },
+    "pageCont_usage_3_3": {
+        "message": "menu item while you are previewing."
+    },
+    "pageCont_notworking": {
+        "message": "If it doesn't work..."
+    },
+    "pageCont_notworking_1_1": {
+        "message": "If you reload this extension while Twitter page has been opened, you may get an error when previewing."
+    },
+    "pageCont_notworking_2_1": {
+        "message": "In this case, you can solve the error to reload the page."
+    },
+    "pageCont_contact": {
+        "message": "Contact me"
+    },
+    "pageCont_contact_1_1": {
+        "message": "Please contact me on"
+    },
+    "pageCont_contact_1_2": {
+        "message": "Twitter DM"
+    },
+    "pageCont_contact_1_3": {
+        "message": "if you have a report of bug or unfair use, question, request, etc."
+    },
+    "pageCont_fromdever": {
+        "message": "From the developer"
+    },
+    "pageCont_fromdever_1_1": {
+        "message": "Thank you for using Twitter Image Preview."
+    },
+    "pageCont_fromdever_2_1": {
+        "message": "I created this extension in about two days so that can preview images without clicking."
+    },
+    "pageCont_fromdever_3_1": {
+        "message": "I hope you like it, and would be glad if you share this extension with your friends."
     }
 }

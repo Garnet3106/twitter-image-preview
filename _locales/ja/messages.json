@@ -16,5 +16,77 @@
     },
     "prevMenuNewlyOpen": {
         "message": "新しく開く"
+    },
+    "pageCont_summary": {
+        "message": "概要"
+    },
+    "pageCont_usage": {
+        "message": "使い方"
+    },
+    "pageCont_usage_1_1": {
+        "message": "サムネイル画像にカーソルをかざしながら"
+    },
+    "pageCont_usage_1_2": {
+        "message": "Shift"
+    },
+    "pageCont_usage_1_3": {
+        "message": "キーを押すとプレビューされます。"
+    },
+    "pageCont_usage_2_1": {
+        "message": ""
+    },
+    "pageCont_usage_2_2": {
+        "message": "Shift"
+    },
+    "pageCont_usage_2_3": {
+        "message": "キーを離すか"
+    },
+    "pageCont_usage_2_4": {
+        "message": "閉じる"
+    },
+    "pageCont_usage_2_5": {
+        "message": "メニューを選択するとプレビューを閉じることができます。"
+    },
+    "pageCont_usage_3_1": {
+        "message": "プレビュー中に"
+    },
+    "pageCont_usage_3_2": {
+        "message": "新しく開く"
+    },
+    "pageCont_usage_3_3": {
+        "message": "を選択すると新しいタブとして画像ソースが開かれます。"
+    },
+    "pageCont_notworking": {
+        "message": "うまく動かない場合"
+    },
+    "pageCont_notworking_1_1": {
+        "message": "Twitter ページが開いている間に拡張機能をリロードするとプレビュー時にエラーが起きることがあります。"
+    },
+    "pageCont_notworking_2_1": {
+        "message": "その際は Twitter ページをリロードすることでエラーを解消することができます。"
+    },
+    "pageCont_contact": {
+        "message": "連絡先"
+    },
+    "pageCont_contact_1_1": {
+        "message": "バグや不正利用の報告, 質問, 要望などはウェブストアページや"
+    },
+    "pageCont_contact_1_2": {
+        "message": "Twitter DM"
+    },
+    "pageCont_contact_1_3": {
+        "message": "にてお願いします。"
+    },
+    "pageCont_fromdever": {
+        "message": "開発者より"
+    },
+    "pageCont_fromdever_1_1": {
+        "message": "Twitter 画像プレビューをご利用いただきありがとうございます。"
+    },
+    "pageCont_fromdever_2_1": {
+        "message": "この拡張機能は TL に流れてきた画像をいちいち開かなくてもいいよう二日ほどで作成しました。"
+    },
+    "pageCont_fromdever_3_1": {
+        "message": "もし気に入っていただけた際はぜひお知り合いなどに拡散してくださると助かります。"
     }
 }
