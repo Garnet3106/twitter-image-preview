@@ -1,4 +1,7 @@
+'use strict';
+
 let twitterUri = 'https://twitter.com';
+let fileSaverJsUri = 'lib/js/FileSaver.js';
 let tweetsJsUri = 'src/tweets.js';
 let installationPageUri = 'src/installed/index.html';
 
@@ -23,6 +26,10 @@ function initExtension() {
 
 function executeScripts(url) {
     if(url.startsWith(twitterUri)) {
+        chrome.tabs.executeScript(null, {
+            file: fileSaverJsUri,
+        }, () => {});
+
         chrome.tabs.executeScript(null, {
             file: tweetsJsUri,
         }, () => {});

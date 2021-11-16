@@ -1,5 +1,7 @@
-disablePreview = false;
+'use strict';
 
+// note: 更新時に上書きするため var キーワードを使う
+var disablePreview = false;
 var latestMousePosX = 0;
 var latestMousePosY = 0;
 
@@ -39,7 +41,9 @@ function onError(message) {
         return;
     }
 
-    console.error(`Unknown error: please notify me about the error on Twitter if you can't solve it. (content: ${message})`);
+    console.error('Unknown error: please notify me about this error on Twitter (@Garnet3106) if it still occurs.\n\nAn error message is the following:');
+    console.error(msg);
+
     disablePreview = true;
 }
 
@@ -87,25 +91,23 @@ function onMouseMove(event) {
     latestMousePosY = event.clientY;
 }
 
-function previewImage(imgSrc) {
+function previewImage(imgUri) {
     if(disablePreview) {
         return;
     }
 
     let wrapper = document.createElement('div');
-
     wrapper.className = 'tip-preview-wrapper';
     wrapper.id = 'tipPrevWrapper';
 
     let img = document.createElement('img');
-
     img.className = 'tip-preview-img';
     img.id = 'tipPrevImg';
-    img.src = imgSrc;
+    img.src = imgUri;
 
     setPreviewImgSize(img);
 
-    let footer = getPrevFooterElem(imgSrc);
+    let footer = getPrevFooterElem(imgUri);
 
     if(footer === null) {
         return;
@@ -130,28 +132,30 @@ function setPreviewImgSize(img) {
 }
 
 // ret: 生成されたフッタ要素; 生成に失敗した場合は null
-function getPrevFooterElem(imgSrc) {
+function getPrevFooterElem(imgUri) {
     // フッタ作成
 
     let footer = document.createElement('div');
     footer.className = 'tip-preview-footer';
 
-    // リスト作成
+    // メニューリスト作成
 
     let menu = document.createElement('div');
     menu.className = 'tip-preview-footer-menu';
 
-    // リストアイテム作成 - 閉じる
+    // リストアイテム - 閉じる
 
-    let closeItemText = '';
-    let openItemText = '';
+    let closeItemText;
+    let openItemText;
+    let downloadItemText;
 
     try {
         closeItemText = chrome.i18n.getMessage('prevMenuClose');
         openItemText = chrome.i18n.getMessage('prevMenuNewlyOpen');
+        downloadItemText = chrome.i18n.getMessage('prevMenuDownload');
     } catch(e) {
         disablePreview = true;
-        console.error('Failed to load locale data. Please reload the page for validating the extension.');
+        console.error('Failed to load locale data. Please reload the page in order to validate the extension.');
         return null;
     }
 
@@ -166,16 +170,39 @@ function getPrevFooterElem(imgSrc) {
 
     menu.append(closeItem);
 
-    // リストアイテム作成 - 新しく開く
+    // リストアイテム - 新規タブ
 
     let openItem = document.createElement('a');
     openItem.className = 'tip-preview-footer-menu-item';
-    openItem.href = imgSrc;
+    openItem.href = imgUri;
     openItem.innerText = openItemText;
     openItem.rel = 'noopener noreferrer';
     openItem.target = '_blank';
 
     menu.append(openItem);
+
+    // リストアイテム - ダウンロード
+
+    let downloadItem = document.createElement('a');
+    downloadItem.className = 'tip-preview-footer-menu-item';
+    downloadItem.innerText = downloadItemText;
+
+    downloadItem.addEventListener('click', () => {
+        let mediaUriPrefix = 'https://pbs.twimg.com/media/';
+        let fileName;
+
+        if(imgUri.startsWith(mediaUriPrefix)) {
+            fileName = imgUri.substring(mediaUriPrefix.length).split('?')[0];
+        } else {
+            fileName = "image";
+        }
+
+        downloadImage(imgUri, fileName, 'jpg');
+    });
+
+    menu.append(downloadItem);
+
+    // メニューリスト追加
     footer.append(menu);
 
     // ディスクリプション作成
@@ -202,11 +229,15 @@ function getPrevFooterElem(imgSrc) {
     return footer;
 }
 
-
 function removeImagePreview(prevWrapper) {
     prevWrapper.style.opacity = '0';
 
     setTimeout(() => {
         prevWrapper.remove();
     }, 100);
+}
+
+function downloadImage(imgUri, fileName, fileExt) {
+    // todo: try-catch
+    download(imgUri, `${fileName}.${fileExt}`);
 }

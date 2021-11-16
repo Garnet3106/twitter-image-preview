@@ -17,6 +17,9 @@
     "prevMenuNewlyOpen": {
         "message": "新しく開く"
     },
+    "prevMenuDownload": {
+        "message": "ダウンロード"
+    },
     "pageCont_summary": {
         "message": "概要"
     },

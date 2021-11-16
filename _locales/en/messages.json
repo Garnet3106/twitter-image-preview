@@ -17,6 +17,9 @@
     "prevMenuNewlyOpen": {
         "message": "Newly Open"
     },
+    "prevMenuDownload": {
+        "message": "Download"
+    },
     "pageCont_summary": {
         "message": "Summary"
     },
