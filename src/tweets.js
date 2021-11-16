@@ -3,10 +3,12 @@ disablePreview = false;
 var latestMousePosX = 0;
 var latestMousePosY = 0;
 
+init();
 
-addCSSElem();
-initEvents();
-
+function init() {
+    addCSSElem();
+    initEvents();
+}
 
 function addCSSElem() {
     let cssElemID = 'tipStyle';
@@ -22,7 +24,6 @@ function addCSSElem() {
 
     document.head.append(link);
 }
-
 
 function initEvents() {
     window.onerror = onError;

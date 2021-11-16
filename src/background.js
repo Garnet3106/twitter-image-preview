@@ -1,5 +1,8 @@
-initExtension();
+let twitterUri = 'https://twitter.com';
+let tweetsJsUri = 'src/tweets.js';
+let installationPageUri = 'src/installed/index.html';
 
+initExtension();
 
 function initExtension() {
     chrome.tabs.query({
@@ -17,18 +20,16 @@ function initExtension() {
     chrome.browserAction.onClicked.addListener(openInstallationPage);
 }
 
-
 function executeScripts(url) {
-    if(url.startsWith('https://twitter.com')) {
+    if(url.startsWith(twitterUri)) {
         chrome.tabs.executeScript(null, {
-            file: './data/tweets.js'
+            file: tweetsJsUri,
         }, () => {});
     }
 }
 
-
 function openInstallationPage() {
     chrome.tabs.create({
-        url: chrome.runtime.getURL('data/installed/index.html')
+        url: chrome.runtime.getURL(installationPageUri),
     });
 }
