@@ -35,9 +35,9 @@ function initEvents() {
 }
 
 // note: chrome.i18n.getMessage() でのエラーはキャッチしない
-function onError(message) {
+function onError(msg) {
     // note: 各ツイートページで毎回発生するため無視; 原因未詳だが重大ではない
-    if(message === 'ResizeObserver loop limit exceeded') {
+    if(msg === 'ResizeObserver loop limit exceeded') {
         return;
     }
 
@@ -70,7 +70,19 @@ function onKeyDown(event) {
     }
 
     if(elem.tagName === 'IMG' && elem.id !== 'tipPrevImg') {
-        previewImage(elem.src)
+        let imgUri = new URL(elem.src);
+        let imgUriParams = new URLSearchParams(imgUri.search);
+        imgUriParams.delete('name');
+        let imgUriParamsStr = imgUriParams.toString();
+        let highQualityImgUri = elem.src.split('?')[0] + (imgUriParamsStr == '' ? '' : '?' + imgUriParamsStr);
+
+        fetch(highQualityImgUri)
+            .then((res) => {
+                console.log(res)
+                let imgUriStr = res === 404 ? highQualityImgUri : elem.src;
+                console.log(imgUriStr)
+                previewImage(imgUriStr);
+            });
     }
 }
 
@@ -189,13 +201,8 @@ function getPrevFooterElem(imgUri) {
 
     downloadItem.addEventListener('click', () => {
         let mediaUriPrefix = 'https://pbs.twimg.com/media/';
-        let fileName;
-
-        if(imgUri.startsWith(mediaUriPrefix)) {
-            fileName = imgUri.substring(mediaUriPrefix.length).split('?')[0];
-        } else {
-            fileName = "image";
-        }
+        let fileName = imgUri.startsWith(mediaUriPrefix) ?
+            imgUri.substring(mediaUriPrefix.length).split('?')[0] : fileName = "image";
 
         downloadImage(imgUri, fileName, 'jpg');
     });
