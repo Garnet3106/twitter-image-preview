@@ -6,19 +6,19 @@ var latestMousePosY = 0;
 init();
 
 function init() {
-    addCSSElem();
+    initCssStyle();
     initEvents();
 }
 
-function addCSSElem() {
+function initCssStyle() {
     let cssElemID = 'tipStyle';
 
-    if(document.getElementById(cssElemID) !== null)
+    if(document.getElementById(cssElemID) !== null) {
         return;
+    }
 
     let link = document.createElement('link');
-
-    link.href = chrome.runtime.getURL('data/tweets.css');
+    link.href = chrome.runtime.getURL('src/tweets.css');
     link.id = cssElemID;
     link.rel = 'stylesheet';
 
@@ -27,26 +27,21 @@ function addCSSElem() {
 
 function initEvents() {
     window.onerror = onError;
-
     document.body.onkeydown = onKeyDown;
     document.body.onkeyup = onKeyUp;
-
     document.body.onmousemove = onMouseMove;
 }
 
-
-/*
- * 説明: chrome.i18n.getMessage() でのエラーはキャッチしない
- */
+// note: chrome.i18n.getMessage() でのエラーはキャッチしない
 function onError(message) {
-    // 各ツイートページで毎回発生するため無視; 原因未詳だが重大ではない
-    if(message === 'ResizeObserver loop limit exceeded')
+    // note: 各ツイートページで毎回発生するため無視; 原因未詳だが重大ではない
+    if(message === 'ResizeObserver loop limit exceeded') {
         return;
+    }
 
     console.error(`Unknown error: please notify me about the error on Twitter if you can't solve it. (content: ${message})`);
     disablePreview = true;
 }
-
 
 function onKeyDown(event) {
     if(event.key === 'Escape') {
@@ -60,39 +55,42 @@ function onKeyDown(event) {
         return;
     }
 
-    if(event.key !== 'Shift')
+    if(event.key !== 'Shift') {
         return;
+    }
 
     let elem = document.elementFromPoint(latestMousePosX, latestMousePosY);
 
-    if(elem === null)
+    if(elem === null) {
         return;
+    }
 
-    if(elem.tagName === 'IMG' && elem.id !== 'tipPrevImg')
+    if(elem.tagName === 'IMG' && elem.id !== 'tipPrevImg') {
         previewImage(elem.src)
+    }
 }
 
-
 function onKeyUp(event) {
-    if(event.key !== 'Shift')
+    if(event.key !== 'Shift') {
         return;
+    }
 
     let prevWrapper = document.getElementById('tipPrevWrapper');
 
-    if(prevWrapper !== null)
+    if(prevWrapper !== null) {
         removeImagePreview(prevWrapper);
+    }
 }
-
 
 function onMouseMove(event) {
     latestMousePosX = event.clientX;
     latestMousePosY = event.clientY;
 }
 
-
 function previewImage(imgSrc) {
-    if(disablePreview)
+    if(disablePreview) {
         return;
+    }
 
     let wrapper = document.createElement('div');
 
@@ -109,8 +107,9 @@ function previewImage(imgSrc) {
 
     let footer = getPrevFooterElem(imgSrc);
 
-    if(footer === null)
+    if(footer === null) {
         return;
+    }
 
     wrapper.append(footer);
     wrapper.append(img);
@@ -122,7 +121,6 @@ function previewImage(imgSrc) {
     }, 10);
 }
 
-
 function setPreviewImgSize(img) {
     if(Math.abs(document.body.clientHeight / img.naturalHeight) < Math.abs(document.body.clientWidth / img.naturalWidth)) {
         img.style.height = '80vh';
@@ -131,21 +129,16 @@ function setPreviewImgSize(img) {
     }
 }
 
-
-/*
- * 返り値: 生成されたフッタ要素; 生成に失敗した場合は null
- */
+// ret: 生成されたフッタ要素; 生成に失敗した場合は null
 function getPrevFooterElem(imgSrc) {
     // フッタ作成
 
     let footer = document.createElement('div');
-
     footer.className = 'tip-preview-footer';
 
     // リスト作成
 
     let menu = document.createElement('div');
-
     menu.className = 'tip-preview-footer-menu';
 
     // リストアイテム作成 - 閉じる
@@ -163,7 +156,6 @@ function getPrevFooterElem(imgSrc) {
     }
 
     let closeItem = document.createElement('a');
-
     closeItem.className = 'tip-preview-footer-menu-item';
     closeItem.innerText = closeItemText;
 
@@ -177,7 +169,6 @@ function getPrevFooterElem(imgSrc) {
     // リストアイテム作成 - 新しく開く
 
     let openItem = document.createElement('a');
-
     openItem.className = 'tip-preview-footer-menu-item';
     openItem.href = imgSrc;
     openItem.innerText = openItemText;
@@ -190,18 +181,15 @@ function getPrevFooterElem(imgSrc) {
     // ディスクリプション作成
 
     let desc = document.createElement('div');
-
     desc.className = 'tip-preview-footer-description';
 
     let descText = document.createElement('div');
-
     descText.className = 'tip-preview-footer-description-text';
     descText.innerText = chrome.i18n.getMessage('prevDescExtName');
 
     desc.append(descText);
 
     let descLink = document.createElement('a');
-
     descLink.className = 'tip-preview-footer-description-link';
     descLink.href = 'https://twitter.com/Garnet3106';
     descLink.innerText = chrome.i18n.getMessage('prevDescUserID');

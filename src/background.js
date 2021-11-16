@@ -11,9 +11,10 @@ function initExtension() {
         executeScripts(tabs[0].url);
     });
 
-    chrome.tabs.onUpdated.addListener((tabID, info, tab) => {
-        if(info.status === 'complete')
+    chrome.tabs.onUpdated.addListener((_tabID, info, tab) => {
+        if(info.status === 'complete') {
             executeScripts(tab.url);
+        }
     });
 
     chrome.runtime.onInstalled.addListener(openInstallationPage);

@@ -27,6 +27,6 @@
     ],
     "version": "1.0.0",
     "web_accessible_resources": [
-        "data/*"
+        "src/tweets.css"
     ]
 }
