@@ -14,8 +14,8 @@
     "prevMenuClose": {
         "message": "閉じる"
     },
-    "prevMenuNewlyOpen": {
-        "message": "新しく開く"
+    "prevMenuNewTab": {
+        "message": "新規タブ"
     },
     "prevMenuDownload": {
         "message": "ダウンロード"

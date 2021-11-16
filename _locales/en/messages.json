@@ -14,8 +14,8 @@
     "prevMenuClose": {
         "message": "Close"
     },
-    "prevMenuNewlyOpen": {
-        "message": "Newly Open"
+    "prevMenuNewTab": {
+        "message": "New Tab"
     },
     "prevMenuDownload": {
         "message": "Download"

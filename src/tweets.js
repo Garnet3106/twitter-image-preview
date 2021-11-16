@@ -151,7 +151,7 @@ function getPrevFooterElem(imgUri) {
 
     try {
         closeItemText = chrome.i18n.getMessage('prevMenuClose');
-        openItemText = chrome.i18n.getMessage('prevMenuNewlyOpen');
+        openItemText = chrome.i18n.getMessage('prevMenuNewTab');
         downloadItemText = chrome.i18n.getMessage('prevMenuDownload');
     } catch(e) {
         disablePreview = true;
@@ -238,6 +238,5 @@ function removeImagePreview(prevWrapper) {
 }
 
 function downloadImage(imgUri, fileName, fileExt) {
-    // todo: try-catch
     download(imgUri, `${fileName}.${fileExt}`);
 }
