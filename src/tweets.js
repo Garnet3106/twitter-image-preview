@@ -52,25 +52,7 @@ function onError(msg) {
 }
 
 function onKeyDown(event) {
-    if(event.ctrlKey) {
-        let zoomedImg = document.getElementById('tipPrevImgZoomed');
-        let footer = document.getElementById('tipPrevFooter');
-
-        if(zoomedImg !== null) {
-            setTimeout(() => {
-                document.body.style.cursor = 'none';
-                zoomedImg.style.opacity = '1';
-            }, 100);
-        }
-
-        if(footer !== null) {
-            footer.style.opacity = '0';
-
-            setTimeout(() => {
-                footer.style.display = 'none';
-            }, 100);
-        }
-    }
+    updateImgZoomStatus(event.ctrlKey);
 
     if(event.key === 'Escape') {
         let prevWrapper = document.getElementById('tipPrevWrapper');
@@ -102,29 +84,15 @@ function onKeyDown(event) {
 
         fetch(highQualityImgUri)
             .then((res) => {
-                // todo: 縦長画像が過剰にズームされる問題
-                // let imgUriStr = res.status === 404 ? elem.src : highQualityImgUri;
-                let imgUriStr = elem.src;
+                let imgUriStr = res.status === 404 ? elem.src : highQualityImgUri;
                 previewImage(imgUriStr);
+                updateImgZoomStatus(event.ctrlKey);
             });
     }
 }
 
 function onKeyUp(event) {
-    if(!event.ctrlKey) {
-        let zoomedImg = document.getElementById('tipPrevImgZoomed');
-        let footer = document.getElementById('tipPrevFooter');
-
-        if(zoomedImg !== null) {
-            document.body.style.cursor = 'auto';
-            zoomedImg.style.opacity = '0';
-        }
-
-        if(footer !== null) {
-            footer.style.display = 'block';
-            footer.style.opacity = '1';
-        }
-    }
+    updateImgZoomStatus(event.ctrlKey);
 
     if(event.key !== 'Shift') {
         return;
@@ -155,8 +123,16 @@ function previewImage(imgUri) {
     img.className = 'tip-preview-img';
     img.dataset.zoom = imgUri;
     img.id = 'tipPrevImg';
-    img.src = imgUri;
-    setPreviewImgSize(img);
+
+    // 画像読み込み後に画像サイズを調整する
+    let imgObj = new Image();
+
+    imgObj.onload = () => {
+        img.src = imgUri;
+        setPreviewImgSize(img);
+	}
+
+    imgObj.src = imgUri;
 
     let zoomedImg = document.createElement('div');
     zoomedImg.className = 'tip-preview-img-zoomed';
@@ -286,6 +262,42 @@ function getPrevFooterElem(imgUri) {
     footer.append(desc);
 
     return footer;
+}
+
+function updateImgZoomStatus(isCtrlKeyDown) {
+    let img = document.getElementById('tipPrevImg');
+    let zoomedImg = document.getElementById('tipPrevImgZoomed');
+    let footer = document.getElementById('tipPrevFooter');
+    let prevWrapper = document.getElementById('tipPrevWrapper');
+
+    if(isCtrlKeyDown) {
+        if(zoomedImg !== null) {
+            setTimeout(() => {
+                prevWrapper.style.cursor = 'zoom-in';
+                img.style.cursor = 'none';
+                zoomedImg.style.opacity = '1';
+            }, 100);
+        }
+
+        if(footer !== null) {
+            footer.style.opacity = '0';
+
+            setTimeout(() => {
+                footer.style.display = 'none';
+            }, 100);
+        }
+    } else {
+        if(zoomedImg !== null) {
+            prevWrapper.style.cursor = 'auto';
+            img.style.cursor = 'auto';
+            zoomedImg.style.opacity = '0';
+        }
+
+        if(footer !== null) {
+            footer.style.display = 'block';
+            footer.style.opacity = '1';
+        }
+    }
 }
 
 function removeImagePreview(prevWrapper) {
