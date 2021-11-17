@@ -2,6 +2,10 @@
 
 // note: 更新時に上書きするため var キーワードを使う
 var disablePreview = false;
+
+var isImagePreviewed = false;
+var latestPreviewedImgUri = null;
+
 var latestMousePosX = 0;
 var latestMousePosY = 0;
 
@@ -65,29 +69,52 @@ function onKeyDown(event) {
         return;
     }
 
-    if(event.key !== 'Shift') {
+    if(event.key === 'Shift') {
+        let elem = document.elementFromPoint(latestMousePosX, latestMousePosY);
+
+        if(elem === null) {
+            return;
+        }
+
+        if(elem.tagName === 'IMG' && elem.id !== 'tipPrevImg') {
+            let imgUri = new URL(elem.src);
+            let imgUriParams = new URLSearchParams(imgUri.search);
+            imgUriParams.delete('name');
+            let imgUriParamsStr = imgUriParams.toString();
+            let highQualityImgUri = elem.src.split('?')[0] + (imgUriParamsStr == '' ? '' : '?' + imgUriParamsStr);
+
+            fetch(highQualityImgUri)
+                .then((res) => {
+                    let imgUriStr = res.status === 404 ? elem.src : highQualityImgUri;
+                    previewImage(imgUriStr);
+                    updateImgZoomStatus(event.ctrlKey);
+                });
+        }
+
         return;
     }
 
-    let elem = document.elementFromPoint(latestMousePosX, latestMousePosY);
+    if(isImagePreviewed && latestPreviewedImgUri !== null) {
+        // note: 閉じるショートカット
+        if(event.key === 'c' || event.key === 'C') {
+            let prevWrapper = document.getElementById('tipPrevWrapper');
 
-    if(elem === null) {
-        return;
-    }
+            if(prevWrapper !== null) {
+                removeImagePreview(prevWrapper);
+            }
+        }
 
-    if(elem.tagName === 'IMG' && elem.id !== 'tipPrevImg') {
-        let imgUri = new URL(elem.src);
-        let imgUriParams = new URLSearchParams(imgUri.search);
-        imgUriParams.delete('name');
-        let imgUriParamsStr = imgUriParams.toString();
-        let highQualityImgUri = elem.src.split('?')[0] + (imgUriParamsStr == '' ? '' : '?' + imgUriParamsStr);
+        // note: ダウンロードショートカット
+        if(event.key === 'd' || event.key === 'D') {
+            downloadImage(latestPreviewedImgUri, undefined, 'jpg');
+        }
 
-        fetch(highQualityImgUri)
-            .then((res) => {
-                let imgUriStr = res.status === 404 ? elem.src : highQualityImgUri;
-                previewImage(imgUriStr);
-                updateImgZoomStatus(event.ctrlKey);
-            });
+        // note: 新規タブショートカット
+        if(event.key === 'n' || event.key === 'N') {
+            window.open(latestPreviewedImgUri, '_blank');
+        }
+
+        event.preventDefault();
     }
 }
 
@@ -114,6 +141,9 @@ function previewImage(imgUri) {
     if(disablePreview) {
         return;
     }
+
+    isImagePreviewed = true;
+    latestPreviewedImgUri = imgUri;
 
     let wrapper = document.createElement('div');
     wrapper.className = 'tip-preview-wrapper';
@@ -228,11 +258,7 @@ function getPrevFooterElem(imgUri) {
     downloadItem.innerText = downloadItemText;
 
     downloadItem.addEventListener('click', () => {
-        let mediaUriPrefix = 'https://pbs.twimg.com/media/';
-        let fileName = imgUri.startsWith(mediaUriPrefix) ?
-            imgUri.substring(mediaUriPrefix.length).split('?')[0] : fileName = "image";
-
-        downloadImage(imgUri, fileName, 'jpg');
+        downloadImage(imgUri, undefined, 'jpg');
     });
 
     menu.append(downloadItem);
@@ -264,6 +290,7 @@ function getPrevFooterElem(imgUri) {
     return footer;
 }
 
+// note: ズーム画像を表示するかを Ctrl キーの押下状態で設定する
 function updateImgZoomStatus(isCtrlKeyDown) {
     let img = document.getElementById('tipPrevImg');
     let zoomedImg = document.getElementById('tipPrevImgZoomed');
@@ -301,6 +328,7 @@ function updateImgZoomStatus(isCtrlKeyDown) {
 }
 
 function removeImagePreview(prevWrapper) {
+    isImagePreviewed = false;
     prevWrapper.style.opacity = '0';
 
     setTimeout(() => {
@@ -308,6 +336,12 @@ function removeImagePreview(prevWrapper) {
     }, 100);
 }
 
-function downloadImage(imgUri, fileName, fileExt) {
+function downloadImage(imgUri, fileName = undefined, fileExt) {
+    if(fileName === undefined) {
+        let mediaUriPrefix = 'https://pbs.twimg.com/media/';
+        fileName = imgUri.startsWith(mediaUriPrefix) ?
+            imgUri.substring(mediaUriPrefix.length).split('?')[0] : fileName = "image";
+    }
+
     download(imgUri, `${fileName}.${fileExt}`);
 }
