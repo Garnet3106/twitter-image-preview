@@ -53,6 +53,11 @@ div.content *:last-child {
     margin-bottom: 20px;
 }
 
+div.content-videoarea {
+    height: 315px;
+    margin-bottom: 20px;
+}
+
 div.content-title {
     border-bottom: 1px solid #000000;
     font-size: 25px;

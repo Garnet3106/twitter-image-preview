@@ -4,7 +4,7 @@ let twitterUri = 'https://twitter.com';
 let driftJsUri = 'lib/js/Drift.js';
 let fileSaverJsUri = 'lib/js/FileSaver.js';
 let tweetsJsUri = 'src/tweets.js';
-let installationPageUri = 'src/installed/index.html';
+let helpPageUri = 'src/help/index.html';
 
 initExtension();
 
@@ -43,6 +43,6 @@ function executeScripts(url) {
 
 function openInstallationPage() {
     chrome.tabs.create({
-        url: chrome.runtime.getURL(installationPageUri),
+        url: chrome.runtime.getURL(helpPageUri),
     });
 }

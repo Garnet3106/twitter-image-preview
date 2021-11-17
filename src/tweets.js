@@ -109,6 +109,12 @@ function onKeyDown(event) {
             downloadImage(latestPreviewedImgUri, undefined, 'jpg');
         }
 
+        // note: ヘルプショートカット
+        if(event.key === 'h' || event.key === 'H') {
+            let helpPageUri = chrome.runtime.getURL('src/help/index.html');
+            window.open(helpPageUri, '_blank');
+        }
+
         // note: 新規タブショートカット
         if(event.key === 'n' || event.key === 'N') {
             window.open(latestPreviewedImgUri, '_blank');
@@ -340,7 +346,7 @@ function downloadImage(imgUri, fileName = undefined, fileExt) {
     if(fileName === undefined) {
         let mediaUriPrefix = 'https://pbs.twimg.com/media/';
         fileName = imgUri.startsWith(mediaUriPrefix) ?
-            imgUri.substring(mediaUriPrefix.length).split('?')[0] : fileName = "image";
+            imgUri.substring(mediaUriPrefix.length).split('?')[0] : fileName = 'image';
     }
 
     download(imgUri, `${fileName}.${fileExt}`);
