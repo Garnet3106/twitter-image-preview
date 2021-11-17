@@ -19,12 +19,16 @@ function initCssStyle() {
         return;
     }
 
-    let link = document.createElement('link');
-    link.href = chrome.runtime.getURL('src/tweets.css');
-    link.id = cssElemID;
-    link.rel = 'stylesheet';
+    let mainLink = document.createElement('link');
+    mainLink.href = chrome.runtime.getURL('src/tweets.css');
+    mainLink.id = cssElemID;
+    mainLink.rel = 'stylesheet';
+    document.head.append(mainLink);
 
-    document.head.append(link);
+    let driftLink = document.createElement('link');
+    driftLink.href = chrome.runtime.getURL('lib/js/drift-basic.min.css');
+    driftLink.rel = 'stylesheet';
+    document.head.append(driftLink);
 }
 
 function initEvents() {
@@ -48,6 +52,26 @@ function onError(msg) {
 }
 
 function onKeyDown(event) {
+    if(event.ctrlKey) {
+        let zoomedImg = document.getElementById('tipPrevImgZoomed');
+        let footer = document.getElementById('tipPrevFooter');
+
+        if(zoomedImg !== null) {
+            setTimeout(() => {
+                document.body.style.cursor = 'none';
+                zoomedImg.style.opacity = '1';
+            }, 100);
+        }
+
+        if(footer !== null) {
+            footer.style.opacity = '0';
+
+            setTimeout(() => {
+                footer.style.display = 'none';
+            }, 100);
+        }
+    }
+
     if(event.key === 'Escape') {
         let prevWrapper = document.getElementById('tipPrevWrapper');
 
@@ -78,15 +102,30 @@ function onKeyDown(event) {
 
         fetch(highQualityImgUri)
             .then((res) => {
-                console.log(res)
-                let imgUriStr = res === 404 ? highQualityImgUri : elem.src;
-                console.log(imgUriStr)
+                // todo: 縦長画像が過剰にズームされる問題
+                // let imgUriStr = res.status === 404 ? elem.src : highQualityImgUri;
+                let imgUriStr = elem.src;
                 previewImage(imgUriStr);
             });
     }
 }
 
 function onKeyUp(event) {
+    if(!event.ctrlKey) {
+        let zoomedImg = document.getElementById('tipPrevImgZoomed');
+        let footer = document.getElementById('tipPrevFooter');
+
+        if(zoomedImg !== null) {
+            document.body.style.cursor = 'auto';
+            zoomedImg.style.opacity = '0';
+        }
+
+        if(footer !== null) {
+            footer.style.display = 'block';
+            footer.style.opacity = '1';
+        }
+    }
+
     if(event.key !== 'Shift') {
         return;
     }
@@ -114,10 +153,21 @@ function previewImage(imgUri) {
 
     let img = document.createElement('img');
     img.className = 'tip-preview-img';
+    img.dataset.zoom = imgUri;
     img.id = 'tipPrevImg';
     img.src = imgUri;
-
     setPreviewImgSize(img);
+
+    let zoomedImg = document.createElement('div');
+    zoomedImg.className = 'tip-preview-img-zoomed';
+    zoomedImg.id = 'tipPrevImgZoomed';
+
+    // ズーム処理を追加 (Drift.JS)
+    new Drift(img, {
+        hoverDelay: 100,
+        paneContainer: zoomedImg,
+        zoomFactor: 2.5,
+    });
 
     let footer = getPrevFooterElem(imgUri);
 
@@ -127,6 +177,7 @@ function previewImage(imgUri) {
 
     wrapper.append(footer);
     wrapper.append(img);
+    wrapper.append(zoomedImg);
 
     document.body.insertBefore(wrapper, document.body.firstChild);
 
@@ -149,6 +200,7 @@ function getPrevFooterElem(imgUri) {
 
     let footer = document.createElement('div');
     footer.className = 'tip-preview-footer';
+    footer.id = 'tipPrevFooter';
 
     // メニューリスト作成
 

@@ -17,9 +17,15 @@ img.tip-preview-img {
     user-select: none;
 }
 
+div.tip-preview-img-zoomed {
+    opacity: 0;
+    transition: opacity 100ms;
+}
+
 div.tip-preview-footer {
     bottom: 30px;
     position: fixed;
+    transition: opacity 100ms;
     width: 100vw;
 }
 
