@@ -5,7 +5,7 @@
             "48": "lib/img/icons/logo_48.png",
             "128": "lib/img/icons/logo_128.png"
         },
-        "default_title": "Twillus - Quick Image Preview for Twitter"
+        "default_title": "__MSG_extName__"
     },
     "background": {
         "service_worker": "background.js"

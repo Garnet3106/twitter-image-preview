@@ -1,5 +1,7 @@
 'use strict';
 
+var storePageUri = 'https://chrome.google.com/webstore/detail/twitter-image-preview-bet/knpbokpcebojngoedkolnmnjghakiadp';
+
 // note: 更新時に上書きするため var キーワードを使う
 var disablePreview = false;
 
@@ -94,30 +96,36 @@ function onKeyDown(event) {
         return;
     }
 
+    function closePrevWrapper() {
+        let prevWrapper = document.getElementById('tipPrevWrapper');
+
+        if(prevWrapper !== null) {
+            removeImagePreview(prevWrapper);
+        }
+    }
+
     if(isImagePreviewed && latestPreviewedImgUri !== null) {
         // note: 閉じるショートカット
         if(event.key === 'c' || event.key === 'C') {
-            let prevWrapper = document.getElementById('tipPrevWrapper');
-
-            if(prevWrapper !== null) {
-                removeImagePreview(prevWrapper);
-            }
+            closePrevWrapper();
         }
 
         // note: ダウンロードショートカット
         if(event.key === 'd' || event.key === 'D') {
             downloadImage(latestPreviewedImgUri, undefined, 'jpg');
+            closePrevWrapper();
         }
 
         // note: ヘルプショートカット
         if(event.key === 'h' || event.key === 'H') {
-            let helpPageUri = chrome.runtime.getURL('src/help/index.html');
-            window.open(helpPageUri, '_blank');
+            window.open(storePageUri, '_blank');
+            closePrevWrapper();
         }
 
         // note: 新規タブショートカット
         if(event.key === 'n' || event.key === 'N') {
             window.open(latestPreviewedImgUri, '_blank');
+            closePrevWrapper();
         }
 
         event.preventDefault();
@@ -279,9 +287,8 @@ function getPrevFooterElem(imgUri, wrapper) {
     // リストアイテム - ヘルプ
 
     let helpItem = document.createElement('a');
-    let helpUri = 'https://chrome.google.com/webstore/detail/twitter-image-preview-bet/knpbokpcebojngoedkolnmnjghakiadp';
     helpItem.className = 'tip-preview-footer-menu-item';
-    helpItem.href = helpUri;
+    helpItem.href = storePageUri;
     helpItem.innerText = helpItemText;
     helpItem.rel = 'noopener noreferrer';
     helpItem.target = '_blank';
