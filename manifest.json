@@ -1,7 +1,9 @@
 {
     "action": {
         "default_icon": {
-            "512": "lib/img/icons/logo_512.png"
+            "16": "lib/img/icons/logo_16.png",
+            "48": "lib/img/icons/logo_48.png",
+            "128": "lib/img/icons/logo_128.png"
         },
         "default_title": "Twillus - Quick Image Preview for Twitter"
     },
@@ -11,7 +13,9 @@
     "default_locale": "en",
     "description": "__MSG_extDesc__",
     "icons": {
-        "512": "lib/img/icons/logo_512.png"
+        "16": "lib/img/icons/logo_16.png",
+        "48": "lib/img/icons/logo_48.png",
+        "128": "lib/img/icons/logo_128.png"
     },
     "manifest_version": 3,
     "name": "__MSG_extName__",
@@ -22,7 +26,7 @@
     "host_permissions": [
         "https://twitter.com/*"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "web_accessible_resources": [
         {
             "matches": [

@@ -15,6 +15,8 @@ function initExtension() {
         executeScripts(tabs[0].url);
     });
 
+    chrome.runtime.onInstalled.addListener(openStorePage);
+
     chrome.tabs.onUpdated.addListener((_tabID, info, tab) => {
         if(info.status === 'complete') {
             executeScripts(tab.url);
