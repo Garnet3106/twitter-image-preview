@@ -1,76 +1,62 @@
-# Twitter Image Preview ( TIP )
+# Twillus - Quick Image Preview for Twitter
 
 ## English
 
-This Chrome extension make you be able to preview thumbnail images quickly on Twitter.
+[v2.0.0 UPDATE]
 
-### Usage
+* Rename Twitter Image Preview to Twillus.
+* Add download button.
+* Add maximum zoom on Ctrl + Shift + Cursor.
+* Add shortcut feature on the menu.
 
-You can preview thumbnail images to press `Shift` key while hovering your mouse over.
+Enlarge thumbnail images on Twitter!
+All you have to do is to place the cursor over an image and press the shift key.
+If you want to see the details, press Ctrl + Shift to turn on maximum zoom!
 
-You can also close the preview to release `Shift` key, or select `Close` menu item.
+Useful menu items (shortcut key):
+- Close preview (C)
+- Open in a new tab (N)
+- Quick download (D)
+- Show help (H)
 
-It will open the image source as a new tab to select `Newly Open` menu item while you are previewing.
-
-### If it doesn't work...
-
-If you reload this extension while Twitter page has been opened, you may get an error when previewing.
-
-In this case, you can solve the error to reload the page.
-
-### Contact me
-
-Please contact me on [Twitter DM](https://twitter.com/Garnet3106) if you have a report of bug or unfair use, question, request, etc.
-
-### From the developer
-
-Thank you for using Twitter Image Preview.
-
-I created this extension in about two days so that can preview images without clicking.
-
-I hope you like it, and would be glad if you share this extension with your friends.
+Please share this extension on Twitter if you like it!
 
 ### Version history
 
-|Version|Release Date|Changes|Notes|
-|:-:|:-:|:-:|:-:|
-|1.0.0|2020/05|Released the first beta version.||
+|Version|Release Date|Changes|
+|:-:|:-:|:-:|
+|1.0.0|2020/05|Release beta version.|
+|2.0.0|2022/01/15|Rename to Twillus.<br>Add new features.|
 
 ## 日本語
 
-Twitter のサムネイル画像を簡単に拡大プレビューできる Chrome 拡張機能です。
+[v2.0.0 アップデート]
 
-### 使い方
+* Twillus (ついらす) に改名
+* 画像ダウンロードボタンを追加
+* 最大ズーム機能を追加 ... Ctrl + Shift + カーソル
+* メニューでのショートカット機能を追加
 
-サムネイル画像にカーソルをかざしながら `Shift` キーを押すとプレビューされます。
+Twitter 上のサムネ画像をクリックせずに拡大表示できます。
+することといえばカーソルを画像に合わせてシフトキーを押すだけ。
+画像の細部まで見たい時は Ctrl + Shift 同時押しで最大ズーム！
 
-`Shift` キーを離すか `閉じる` メニューを選択するとプレビューを閉じることができます。
+便利なメニュー項目 (ショートカットキー)
+- プレビューを閉じる (C)
+- 新規タブで開く (N)
+- クイックダウンロード (D)
+- ヘルプ表示 (H)
 
-プレビュー中に `新しく開く` を選択すると新しいタブとして画像ソースが開かれます。
+ちょっとだけ画像を覗いてみたい時、イラストをたくさん見たい時など、日常的に使える拡張機能です。
 
-### うまく動かない場合
-
-Twitter ページが開いている間に拡張機能をリロードするとプレビュー時にエラーが起きることがあります。
-
-その際は Twitter ページをリロードすることでエラーを解消することができます。
-
-### 連絡先
-
-バグや不正利用の報告, 質問, 要望などはウェブストアページや [Twitter DM](https://twitter.com/Garnet3106) にてお願いします。
-
-### 開発者より
-
-Twitter 画像プレビューをご利用いただきありがとうございます。
-
-この拡張機能は TL に流れてきた画像をいちいち開かなくてもいいよう二日ほどで作成しました。
-
-もし気に入っていただけた際はぜひお知り合いなどに拡散してくださると助かります。
+もしよろしければ Twitter での拡散をお願いします！
 
 ### バージョン履歴
 
-|バージョン|リリース日|変更点|備考|
-|:-:|:-:|:-:|:-:|
-|1.0.0|2020/05|初ベータ版をリリース||
+|バージョン|リリース日|変更点|
+|:-:|:-:|:-:|
+|1.0.0|2020/05|ベータ版をリリース|
+|2.0.0|2022/01/15|Twillus (ついらす) に改名<br>新機能を追加|
 
 ---
 
