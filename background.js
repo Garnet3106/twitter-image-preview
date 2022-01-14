@@ -21,22 +21,23 @@ function initExtension() {
         }
     });
 
-    chrome.browserAction.onClicked.addListener(openStorePage);
+    chrome.action.onClicked.addListener(openStorePage);
 }
 
 function executeScripts(url) {
     if(url.startsWith(twitterUri)) {
-        chrome.tabs.executeScript(null, {
-            file: driftJsUri,
-        }, () => {});
-
-        chrome.tabs.executeScript(null, {
-            file: fileSaverJsUri,
-        }, () => {});
-
-        chrome.tabs.executeScript(null, {
-            file: tweetsJsUri,
-        }, () => {});
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true,
+        })
+            .then(([tab]) => {
+                chrome.scripting.executeScript({
+                    target: {
+                        tabId: tab.id,
+                    },
+                    files: [driftJsUri, fileSaverJsUri, tweetsJsUri],
+                });
+            });
     }
 }
 

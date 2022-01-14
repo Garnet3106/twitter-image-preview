@@ -1,12 +1,12 @@
 {
     "extName": {
-        "message": "Twitter 画像プレビュー (ベータ)"
+        "message": "Twillus - Twitter サムネをかんたんプレビュー"
     },
     "extDesc": {
-        "message": "Twitter のサムネイル画像をシフトキーで拡大プレビューします。"
+        "message": "Shift キーでサムネイル画像を拡大できます"
     },
     "prevDescExtName": {
-        "message": "Twitter 画像プレビュー by"
+        "message": "Twillus developed by"
     },
     "prevDescUserID": {
         "message": "@Garnet3106"

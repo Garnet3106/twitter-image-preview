@@ -1,12 +1,12 @@
 {
     "extName": {
-        "message": "Twitter Image Preview (beta)"
+        "message": "Twillus - Quick Image Preview for Twitter"
     },
     "extDesc": {
-        "message": "Preview thumbnail images on Twitter with the shift key."
+        "message": "Preview thumbnail images largely with the shift key."
     },
     "prevDescExtName": {
-        "message": "Twitter Image Preview by"
+        "message": "Twillus developed by"
     },
     "prevDescUserID": {
         "message": "@Garnet3106"
