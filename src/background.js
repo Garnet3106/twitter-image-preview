@@ -4,7 +4,7 @@ let twitterUri = 'https://twitter.com';
 let driftJsUri = 'lib/js/Drift.js';
 let fileSaverJsUri = 'lib/js/FileSaver.js';
 let tweetsJsUri = 'src/tweets.js';
-let helpPageUri = 'src/help/index.html';
+let storePageUri = 'https://chrome.google.com/webstore/detail/twitter-image-preview-bet/knpbokpcebojngoedkolnmnjghakiadp';
 
 initExtension();
 
@@ -21,8 +21,7 @@ function initExtension() {
         }
     });
 
-    chrome.runtime.onInstalled.addListener(openInstallationPage);
-    chrome.browserAction.onClicked.addListener(openInstallationPage);
+    chrome.browserAction.onClicked.addListener(openStorePage);
 }
 
 function executeScripts(url) {
@@ -41,8 +40,8 @@ function executeScripts(url) {
     }
 }
 
-function openInstallationPage() {
+function openStorePage() {
     chrome.tabs.create({
-        url: chrome.runtime.getURL(helpPageUri),
+        url: storePageUri,
     });
 }

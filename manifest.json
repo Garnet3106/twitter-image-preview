@@ -1,9 +1,7 @@
 {
     "browser_action": {
         "default_icon": {
-            "32": "lib/img/icons/logo_32.png",
-            "24": "lib/img/icons/logo_24.png",
-            "16": "lib/img/icons/logo_16.png"
+            "512": "lib/img/icons/logo_512.png"
         },
         "default_title": "Twitter Image Preview (beta)"
     },
@@ -15,9 +13,7 @@
     "default_locale": "en",
     "description": "__MSG_extDesc__",
     "icons": {
-        "128": "lib/img/icons/logo_128.png",
-        "48": "lib/img/icons/logo_48.png",
-        "16": "lib/img/icons/logo_16.png"
+        "512": "lib/img/icons/logo_512.png"
     },
     "manifest_version": 2,
     "name": "__MSG_extName__",

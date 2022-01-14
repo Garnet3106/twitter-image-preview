@@ -181,7 +181,7 @@ function previewImage(imgUri) {
         zoomFactor: 2.5,
     });
 
-    let footer = getPrevFooterElem(imgUri);
+    let footer = getPrevFooterElem(imgUri, wrapper);
 
     if(footer === null) {
         return;
@@ -207,7 +207,7 @@ function setPreviewImgSize(img) {
 }
 
 // ret: 生成されたフッタ要素; 生成に失敗した場合は null
-function getPrevFooterElem(imgUri) {
+function getPrevFooterElem(imgUri, wrapper) {
     // フッタ作成
 
     let footer = document.createElement('div');
@@ -224,11 +224,13 @@ function getPrevFooterElem(imgUri) {
     let closeItemText;
     let openItemText;
     let downloadItemText;
+    let helpItemText;
 
     try {
         closeItemText = chrome.i18n.getMessage('prevMenuClose');
         openItemText = chrome.i18n.getMessage('prevMenuNewTab');
         downloadItemText = chrome.i18n.getMessage('prevMenuDownload');
+        helpItemText = chrome.i18n.getMessage('prevMenuHelp');
     } catch(e) {
         disablePreview = true;
         console.error('Failed to load locale data. Please reload the page in order to validate the extension.');
@@ -257,6 +259,10 @@ function getPrevFooterElem(imgUri) {
 
     menu.append(openItem);
 
+    openItem.addEventListener('click', () => {
+        removeImagePreview(wrapper);
+    });
+
     // リストアイテム - ダウンロード
 
     let downloadItem = document.createElement('a');
@@ -265,9 +271,26 @@ function getPrevFooterElem(imgUri) {
 
     downloadItem.addEventListener('click', () => {
         downloadImage(imgUri, undefined, 'jpg');
+        removeImagePreview(wrapper);
     });
 
     menu.append(downloadItem);
+
+    // リストアイテム - ヘルプ
+
+    let helpItem = document.createElement('a');
+    let helpUri = 'https://chrome.google.com/webstore/detail/twitter-image-preview-bet/knpbokpcebojngoedkolnmnjghakiadp';
+    helpItem.className = 'tip-preview-footer-menu-item';
+    helpItem.href = helpUri;
+    helpItem.innerText = helpItemText;
+    helpItem.rel = 'noopener noreferrer';
+    helpItem.target = '_blank';
+
+    helpItem.addEventListener('click', () => {
+        removeImagePreview(wrapper);
+    });
+
+    menu.append(helpItem);
 
     // メニューリスト追加
     footer.append(menu);
