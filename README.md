@@ -2,6 +2,11 @@
 
 ## English
 
+[v2.1.0 UPDATE]
+
+* Fixed size of the image menu.
+* Added release note / guide page.
+
 [v2.0.0 UPDATE]
 
 * Rename Twitter Image Preview to Twillus.
@@ -27,8 +32,14 @@ Please share this extension on Twitter if you like it!
 |:-:|:-:|:-:|
 |1.0.0|2020/05|Release beta version.|
 |2.0.0|2022/01/15|Rename to Twillus.<br>Add new features.|
+|2.1.0|2024/03|Fixed UI.<br>Added release note page.|
 
 ## 日本語
+
+[v2.1.0 アップデート]
+
+* 画像メニューのサイズを変更しました。
+* リリースノート・ガイドページを追加しました。
 
 [v2.0.0 アップデート]
 
@@ -57,6 +68,7 @@ Twitter 上のサムネ画像をクリックせずに拡大表示できます。
 |:-:|:-:|:-:|
 |1.0.0|2020/05|ベータ版をリリース|
 |2.0.0|2022/01/15|Twillus (ついらす) に改名<br>新機能を追加|
+|2.1.0|2024/03|一部UIを修正<br>リリースノートページを追加|
 
 ---
 
