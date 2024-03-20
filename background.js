@@ -4,7 +4,6 @@ let twitterUri = 'https://twitter.com';
 let driftJsUri = 'lib/js/Drift.js';
 let fileSaverJsUri = 'lib/js/FileSaver.js';
 let tweetsJsUri = 'src/tweets.js';
-let storePageUri = 'https://chrome.google.com/webstore/detail/twitter-image-preview-bet/knpbokpcebojngoedkolnmnjghakiadp';
 
 initExtension();
 
@@ -15,7 +14,11 @@ function initExtension() {
         executeScripts(tabs[0].url);
     });
 
-    chrome.runtime.onInstalled.addListener(openStorePage);
+    chrome.runtime.onInstalled.addListener((details) => {
+        if (details.reason === 'install' || details.reason === 'update') {
+            openGuidePage();
+        }
+    });
 
     chrome.tabs.onUpdated.addListener((_tabID, info, tab) => {
         if(info.status === 'complete') {
@@ -23,7 +26,7 @@ function initExtension() {
         }
     });
 
-    chrome.action.onClicked.addListener(openStorePage);
+    chrome.action.onClicked.addListener(openGuidePage);
 }
 
 function executeScripts(url) {
@@ -43,8 +46,7 @@ function executeScripts(url) {
     }
 }
 
-function openStorePage() {
-    chrome.tabs.create({
-        url: storePageUri,
-    });
+function openGuidePage() {
+    let url = chrome.runtime.getURL('pages/release_notes.html');
+    chrome.tabs.create({ url });
 }
