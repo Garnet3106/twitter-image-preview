@@ -24,13 +24,13 @@
         "tabs"
     ],
     "host_permissions": [
-        "https://twitter.com/*"
+        "https://x.com/*"
     ],
     "version": "2.1.0",
     "web_accessible_resources": [
         {
             "matches": [
-                "https://twitter.com/*"
+                "https://x.com/*"
             ],
             "resources": [
                 "src/tweets.css",

@@ -1,6 +1,6 @@
 'use strict';
 
-let twitterUri = 'https://twitter.com';
+let twitterUri = 'https://x.com';
 let driftJsUri = 'lib/js/Drift.js';
 let fileSaverJsUri = 'lib/js/FileSaver.js';
 let tweetsJsUri = 'src/tweets.js';
