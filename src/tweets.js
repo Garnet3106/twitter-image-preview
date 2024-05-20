@@ -58,6 +58,10 @@ function onError(msg) {
 }
 
 function onKeyDown(event) {
+    if (event.repeat) {
+        return;
+    }
+
     updateImgZoomStatus(event.ctrlKey);
 
     if(event.key === 'Escape') {
